@@ -130,7 +130,7 @@ public class Inventory : MonoBehaviour
                     if (inventoryItemList[j].itemID == _itemID)     // 같은 아이템이 있다면 개수만 증가
                     {
                         slots[j].IncreaseCount(inventoryItemList[j]);
-                        for (int k = 0; k < InventoryDataManager.Instance.inventoryItemList.Count; k++)
+                        for (int k = 0; k < InventoryDataManager.Instance.inventoryItemList.Count; k++) // 인벤토리 데이터 저장용
                         {
                             if (InventoryDataManager.Instance.inventoryItemList[k].itemID == _itemID)
                             {
@@ -145,15 +145,15 @@ public class Inventory : MonoBehaviour
                         inventoryItemList.Add(ItemDatabase.itemList[i]);            // 없다면 인벤토리 아이템 리스트에 해당 아이템 추가
                         CreateSlot();                                               // 슬롯 생성
                         slots[slots.Count - 1].Additem(ItemDatabase.itemList[i]);   // 슬롯에 아이템 넣기
-                        InventoryDataManager.Instance.inventoryItemList.Add(ItemDatabase.itemList[i]);
+                        InventoryDataManager.Instance.inventoryItemList.Add(ItemDatabase.itemList[i]); // 인벤토리 데이터 저장용
                         //ItemDatabase.itemList[i].isPicking = false;
                         return;
                     }
                 }
-                return;
             }
         }
         Debug.LogError("데이터베이스에 해당 ID 값을 가진 아이템이 존재하지 않습니다."); // 데이터베이스에 해당하는 아이템 ID가 존재하지 않는 경우
+        return;
     }
 
     /*

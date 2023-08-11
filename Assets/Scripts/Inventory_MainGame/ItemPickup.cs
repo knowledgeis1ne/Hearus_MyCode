@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -16,6 +17,7 @@ public class ItemPickup : MonoBehaviour
     private Vector3 objectPosition;
     private Quaternion objectRotation;
     private GameObject particlePrefab;
+    private ParticleSystem particleSystem;
 
     private void Start()
     {
@@ -25,17 +27,17 @@ public class ItemPickup : MonoBehaviour
         objectPosition = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z); // 해당 오브젝트의 위치 저장
         objectRotation = new Quaternion(-90, 0, 0, 90); // 파티클이 위로 나오도록 Rotation 설정
 
-        particlePrefab = Resources.Load("Object_Particle") as GameObject; // Resources/Prefabs/Object Particle
-        Instantiate(particlePrefab, objectPosition, objectRotation);
-        //particlePrefab.Pause();
+        particlePrefab = Resources.Load("Object_Particle") as GameObject; // Resources/Prefabs/Object Particle 로드
+        Instantiate(particlePrefab, objectPosition, objectRotation); // 인스턴스화
+        particleSystem = particlePrefab.GetComponent<ParticleSystem>(); // ParticleSystem 컴포넌트 가져오기
+        particleSystem.Play();
     }
 
     private void FixedUpdate()
     {
         if (CheckObjectInCamera(gameObject))
         {
-            Debug.Log("CheckObjectInCamera()");
-            //particlePrefab.Play();
+            Debug.Log("CheckObjectInCamera() " + gameObject.GetComponent<ItemPickup>()._itemID);
         }
     }
 
