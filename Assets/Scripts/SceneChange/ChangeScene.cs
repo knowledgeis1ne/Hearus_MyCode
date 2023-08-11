@@ -12,7 +12,6 @@ public class ChangeScene : MonoBehaviour
     [SerializeField] RectTransform fader2;
 
     public static Action target;
-    public static Action target2;
 
     private void Start()
     {
@@ -69,7 +68,6 @@ public class ChangeScene : MonoBehaviour
 
     private void Awake()
     {
-        target = () => { MoveToGame(); };
-        target2 = () => { MoveToFirst(); };
+        target = () => { MoveToGame(); }; 
     }
 }
